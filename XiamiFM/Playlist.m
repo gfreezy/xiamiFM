@@ -18,13 +18,6 @@
     return self;
 }
 
-- (NSMutableArray *)playedList {
-    if (!_playedList) {
-        _playedList = [NSMutableArray arrayWithCapacity:20];
-    }
-    return _playedList;
-}
-
 - (NSMutableArray *)playingList {
     if (!_playingList) {
         _playingList = [NSMutableArray arrayWithCapacity:20];
@@ -49,7 +42,6 @@
         NSRange range = NSMakeRange(0, count);
         NSArray *poped = [self.playingList subarrayWithRange:range];
         [self.playingList removeObjectsInRange:range];
-        [self.playedList addObjectsFromArray:poped];
 
         return poped;
     }

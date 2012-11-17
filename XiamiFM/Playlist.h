@@ -20,8 +20,6 @@ typedef enum {
     NSMutableData *receivedData;
 }
 
-@property (strong, nonatomic) NSMutableArray *playedList;
-
 @property (strong, nonatomic) NSMutableArray *playingList;
 
 @property (nonatomic) PlaylistStatus status;
