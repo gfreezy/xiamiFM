@@ -15,7 +15,28 @@
 {
     self.player = [[MusicPlayer alloc] init];
     [self.player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
-
+    [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask|NSSystemDefinedMask) handler:^(NSEvent *event) {
+        if (event.type == NSSystemDefined) {
+            // the following code is from http://weblog.rogueamoeba.com/2007/09/29/apple-keyboard-media-key-event-handling/
+            int keyCode = (event.data1 & 0xFFFF0000) >> 16;
+            int keyFlags = ([event data1] & 0x0000FFFF);
+            int keyDown = (((keyFlags & 0xFF00) >> 8)) == 0xB;  //0xA is keyup, 0xB is keydown
+            if (keyDown) {
+                switch (keyCode) {
+                    case 19:    //next key
+                        [self next:nil];
+                        break;
+                    case 16:    // play or stop key
+                        [self play:nil];
+                        break;
+                    case 20:  // prev key
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }];
     [self stopped];
 }
 
