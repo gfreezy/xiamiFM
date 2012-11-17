@@ -13,6 +13,12 @@
 		FA949570164E9FF7007002EC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FA94956E164E9FF7007002EC /* Credits.rtf */; };
 		FA949573164E9FF7007002EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949572164E9FF7007002EC /* AppDelegate.m */; };
 		FA949576164E9FF7007002EC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA949574164E9FF7007002EC /* MainMenu.xib */; };
+		FA94957D164EB468007002EC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA94957C164EB468007002EC /* AVFoundation.framework */; };
+		FA94957F164F62D9007002EC /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA94957E164F62D9007002EC /* CoreMedia.framework */; };
+		FA949582164F8DFA007002EC /* MusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949581164F8DFA007002EC /* MusicPlayer.m */; };
+		FA949585164F97C3007002EC /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949584164F97C3007002EC /* Playlist.m */; };
+		FA949588164FE647007002EC /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949587164FE647007002EC /* Track.m */; };
+		FA94958B164FE73B007002EC /* PlaylistParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FA94958A164FE73B007002EC /* PlaylistParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +35,16 @@
 		FA949571164E9FF7007002EC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FA949572164E9FF7007002EC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FA949575164E9FF7007002EC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		FA94957C164EB468007002EC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FA94957E164F62D9007002EC /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		FA949580164F8DFA007002EC /* MusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayer.h; sourceTree = "<group>"; };
+		FA949581164F8DFA007002EC /* MusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayer.m; sourceTree = "<group>"; };
+		FA949583164F97C3007002EC /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
+		FA949584164F97C3007002EC /* Playlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
+		FA949586164FE647007002EC /* Track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
+		FA949587164FE647007002EC /* Track.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Track.m; sourceTree = "<group>"; };
+		FA949589164FE73B007002EC /* PlaylistParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistParser.h; sourceTree = "<group>"; };
+		FA94958A164FE73B007002EC /* PlaylistParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +52,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA94957F164F62D9007002EC /* CoreMedia.framework in Frameworks */,
+				FA94957D164EB468007002EC /* AVFoundation.framework in Frameworks */,
 				FA949560164E9FF7007002EC /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,6 +81,8 @@
 		FA94955E164E9FF7007002EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA94957E164F62D9007002EC /* CoreMedia.framework */,
+				FA94957C164EB468007002EC /* AVFoundation.framework */,
 				FA94955F164E9FF7007002EC /* Cocoa.framework */,
 				FA949561164E9FF7007002EC /* Other Frameworks */,
 			);
@@ -85,6 +105,14 @@
 				FA949571164E9FF7007002EC /* AppDelegate.h */,
 				FA949572164E9FF7007002EC /* AppDelegate.m */,
 				FA949574164E9FF7007002EC /* MainMenu.xib */,
+				FA949580164F8DFA007002EC /* MusicPlayer.h */,
+				FA949581164F8DFA007002EC /* MusicPlayer.m */,
+				FA949583164F97C3007002EC /* Playlist.h */,
+				FA949584164F97C3007002EC /* Playlist.m */,
+				FA949586164FE647007002EC /* Track.h */,
+				FA949587164FE647007002EC /* Track.m */,
+				FA949589164FE73B007002EC /* PlaylistParser.h */,
+				FA94958A164FE73B007002EC /* PlaylistParser.m */,
 				FA949566164E9FF7007002EC /* Supporting Files */,
 			);
 			path = XiamiFM;
@@ -168,6 +196,10 @@
 			files = (
 				FA94956C164E9FF7007002EC /* main.m in Sources */,
 				FA949573164E9FF7007002EC /* AppDelegate.m in Sources */,
+				FA949582164F8DFA007002EC /* MusicPlayer.m in Sources */,
+				FA949585164F97C3007002EC /* Playlist.m in Sources */,
+				FA949588164FE647007002EC /* Track.m in Sources */,
+				FA94958B164FE73B007002EC /* PlaylistParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
