@@ -43,14 +43,18 @@
     }
     NSUInteger value = [[change valueForKey:NSKeyValueChangeNewKey] unsignedIntegerValue];
     
-    if(object == self.playlist && (PlaylistStatus)value == PlaylistNotEmptyAndIsReady) {
-        NSLog(@"playlist load ready");
-        [self loadMoreTracks];
+    if(object == self.playlist) {
+        if((PlaylistStatus)value == PlaylistNotEmptyAndIsReady) {
+            NSLog(@"playlist load ready");
+            [self loadMoreTracks];
+        }
     }
     
-    else if (object == self.queuePlayer && (AVPlayerStatus)value == AVPlayerStatusFailed) {
-        NSLog(@"queue player error: %@", self.queuePlayer.error);
-        self.status = error;
+    else if (object == self.queuePlayer) {
+        if((AVPlayerStatus)value == AVPlayerStatusFailed) {
+            NSLog(@"queue player error: %@", self.queuePlayer.error);
+            self.status = error;
+        }
     }
     
     else {
@@ -64,6 +68,8 @@
         else if((AVPlayerItemStatus)value == AVPlayerStatusFailed) {
             NSLog(@"playitem status error");
             [self next];
+        } else {
+            NSLog(@"playitem status other: %lu", value);
         }
     }
 }
@@ -77,6 +83,7 @@
     if (self.queuePlayer.items.count >= 1 && self.status == ready) {
         [self.queuePlayer play];
         self.status = playing;
+        isPlaying = YES;
     } else {
         self.status = loading;
     }
@@ -89,18 +96,26 @@
     @catch (NSException *exception) {
         ;
     }
+    
+    if (self.queuePlayer.items.count <= 1) {
+        [self loadMoreTracks];
+    }
+    
     self.status = loading;
-    isPlaying = YES;
     
     [self.queuePlayer advanceToNextItem];
     [self.queuePlayer.currentItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL ];
 
-    if (self.queuePlayer.currentItem.status == AVPlayerItemStatusReadyToPlay) {
-        self.status = playing;
-    }
-
-    if (self.queuePlayer.items.count <= 1) {
-        [self loadMoreTracks];
+    switch (self.queuePlayer.currentItem.status) {
+        case AVPlayerItemStatusReadyToPlay:
+            NSLog(@"playitem status ready immediately");
+            self.status = isPlaying ? playing: ready;
+            break;
+        case AVPlayerItemStatusFailed:
+            NSLog(@"playitem status failed immediately");
+            [self next];
+        default:
+            break;
     }
 }
 
@@ -112,6 +127,7 @@
 - (void)pause {
     [self.queuePlayer pause];
     self.status = ready;
+    isPlaying = NO;
 }
 
 - (float) volume {
@@ -139,7 +155,7 @@
     AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
     if ([self.queuePlayer canInsertItem:item afterItem:nil]) {
         if (self.queuePlayer.items.count == 0) {
-            [item addObserver:self forKeyPath:@"stats" options:NSKeyValueObservingOptionNew context:NULL];
+            [item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
         }
         [self.queuePlayer insertItem:item afterItem:nil];
     }
