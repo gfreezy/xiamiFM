@@ -9,6 +9,7 @@
 #import <AVFoundation/AVPlayerItem.h>
 #import <CoreMedia/CMTime.h>
 #import "MusicPlayer.h"
+#import "Track.h"
 
 
 @implementation MusicPlayer

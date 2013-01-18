@@ -13,7 +13,15 @@
 
 - (id)initWithData:(NSData *)data {
     if (self = [super init]) {
-        self.data = data;
+        _parser = [[NSXMLParser alloc] initWithData:data];
+        [self parse];
+    }
+    return self;
+}
+
+- (id)initWithXMLParser:(NSXMLParser *)XMLParser {
+    if (self = [super init]) {
+        _parser = XMLParser;
         [self parse];
     }
     return self;
@@ -23,13 +31,6 @@
     [self.parser setDelegate:self];
 //    [self.parser setShouldResolveExternalEntities:YES];
     [self.parser parse];
-}
-
-- (NSXMLParser *)parser {
-    if (!_parser) {
-        _parser = [[NSXMLParser alloc] initWithData:self.data];
-    }
-    return _parser;
 }
 
 - (NSArray *)playlist {

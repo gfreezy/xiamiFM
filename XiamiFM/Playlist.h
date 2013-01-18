@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Track.h"
 
 typedef enum {
     PlaylistEmpty = 0,
@@ -16,15 +15,17 @@ typedef enum {
     PlaylistNotEmptyAndIsLoading,
 }PlaylistStatus;
 
-@interface Playlist : NSObject {
-    NSMutableData *receivedData;
-}
+@class Track;
+
+@interface Playlist : NSObject
 
 @property (strong, nonatomic) NSMutableArray *playingList;
 
 @property (nonatomic) PlaylistStatus status;
 
 - (NSArray *)more:(NSUInteger)count;
+
+- (Track *)first;
 
 - (void) fetchFromUpstream;
 

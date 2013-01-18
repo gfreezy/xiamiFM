@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Track.h"
+
+@class Track;
 
 @interface PlaylistParser : NSObject <NSXMLParserDelegate> {
     NSMutableArray *trackList;
@@ -17,10 +18,10 @@
 
 @property (strong, nonatomic) NSXMLParser *parser;
 
-@property (strong) NSData *data;
-
 @property (readonly) NSArray *playlist;
 
 - (id)initWithData:(NSData *)data;
+
+- (id)initWithXMLParser:(NSXMLParser *)XMLParser;
 
 @end

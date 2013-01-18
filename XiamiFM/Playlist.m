@@ -8,6 +8,7 @@
 
 #import "Playlist.h"
 #import "PlaylistParser.h"
+#import <AFNetworking/AFXMLRequestOperation.h>
 
 @implementation Playlist
 
@@ -32,6 +33,10 @@
     return _status;
 }
 
+- (Track *)first {
+    return [[self more:1] lastObject];
+}
+
 - (NSArray *)more:(NSUInteger)count {
     if (self.playingList.count < count && (self.status == PlaylistEmpty || self.status == PlaylistNotEmptyAndIsReady)) {
         // Only one load is allowed
@@ -53,37 +58,16 @@
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:fmURL]
                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                                           timeoutInterval:60.0];
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        receivedData = [NSMutableData data];
-    } else {
-        NSLog(@"fetch from upstream failed");
-    }
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [receivedData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [receivedData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    // inform the user
-    NSLog(@"Connection failed! Error - %@ %@",
-          [error localizedDescription],
-          [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    PlaylistParser *parser = [[PlaylistParser alloc] initWithData:receivedData];
-    [self.playingList addObjectsFromArray:parser.playlist];
-    self.status = PlaylistNotEmptyAndIsReady;
+    
+    AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:theRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+        PlaylistParser *parser = [[PlaylistParser alloc] initWithXMLParser:XMLParser];
+        [self.playingList addObjectsFromArray:parser.playlist];
+        self.status = PlaylistNotEmptyAndIsReady;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+        NSLog(@"error: %@", error);
+    }];
+    
+    [operation start];
 }
 
 @end
