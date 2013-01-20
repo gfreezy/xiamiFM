@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MusicPlayer.h"
+
+@class ASPlaylist;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
@@ -19,7 +20,13 @@
 
 @property (weak) IBOutlet NSButton *btnNext;
 
-@property (strong, nonatomic) MusicPlayer *player;
+@property (weak) IBOutlet NSTextField *labelStatus;
+
+@property (weak) IBOutlet NSSlider *volumeSlider;
+
+@property (strong, nonatomic) ASPlaylist *playlist;
+
+@property (weak) IBOutlet NSSlider *progress;
 
 - (IBAction)play:(NSButton *)sender;
 
@@ -27,6 +34,6 @@
 
 - (IBAction)next:(NSButton *)sender;
 
-@property (weak) IBOutlet NSTextField *labelStatus;
+- (IBAction)volumeChanged:(NSSlider *)sender;
 
 @end

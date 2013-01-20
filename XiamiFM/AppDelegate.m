@@ -6,15 +6,28 @@
 //  Copyright (c) 2012 Alex F. All rights reserved.
 //
 #import <AVFoundation/AVPlayerItem.h>
+#import <AFNetworking/AFXMLRequestOperation.h>
 #import "AppDelegate.h"
+#import "ASPlaylist.h"
+#import "PlaylistParser.h"
+#import "Track.h"
 
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.player = [[MusicPlayer alloc] init];
-    [self.player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
+    self.playlist = [[ASPlaylist alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistError:) name:ASStreamError object:self.playlist];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRunningOutOfSong:) name:ASRunningOutOfSongs object:self.playlist];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRunningOutOfSong:) name:ASNoSongsLeft object:self.playlist];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newSongPlaying:) name:ASNewSongPlaying object:self.playlist];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(createdNewSteam:) name:ASCreatedNewStream object:self.playlist];
+    [self fetchMoreSongs];
+    [self.playlist setVolume:1];
+    [self disable];
+    
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(oneSecondTick:) userInfo:nil repeats:YES];
     [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyDownMask|NSSystemDefinedMask) handler:^(NSEvent *event) {
         if (event.type == NSSystemDefined) {
             // the following code is from http://weblog.rogueamoeba.com/2007/09/29/apple-keyboard-media-key-event-handling/
@@ -37,36 +50,57 @@
             }
         }
     }];
-    [self stopped];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"status"]) {
-        Status o = (Status)[[change valueForKey:NSKeyValueChangeNewKey] integerValue];
-        switch (o) {
-            case ready:
-                NSLog(@"ready");
-                [self ready];
-                break;
-            case loading:
-                NSLog(@"loading");
-                [self loading];
-                break;
-            case playing:
-                NSLog(@"playing");
-                [self playing];
-                break;
-            case stopped:
-                NSLog(@"stopped");
-                [self stopped];
-                break;
-            case error:
-                NSLog(@"error");
-                [self reloadMusicPlayer];
-                [self stopped];
-                break;
-        }
+- (void)playlistError:(NSNotification *)notification {
+    NSAssert([notification object] == self.playlist,
+             @"Should only receive notifications for the current playlist");
+    NSLog(@"error");
+}
+
+- (void)playlistRunningOutOfSong:(NSNotification *)notification {
+    [self fetchMoreSongs];
+}
+
+- (void)newSongPlaying:(NSNotification *)notification {
+    
+}
+
+- (void)createdNewSteam:(NSNotification *)notification {
+    [self ready];
+}
+
+- (void)oneSecondTick:(NSTimer *)timer {
+    double p;
+    BOOL ret = [self.playlist progress:&(p)];
+    if (!ret) {
+        return;
     }
+    
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0.1];
+    [[self.progress animator] setDoubleValue:p];
+    [NSAnimationContext endGrouping];
+}
+
+- (void)fetchMoreSongs {
+    NSString *fmURL = @"http://www.xiami.com/radio/xml/type/8/id/0";
+    NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:fmURL]
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                          timeoutInterval:60.0];
+    
+    AFXMLRequestOperation *operation = [AFXMLRequestOperation XMLParserRequestOperationWithRequest:theRequest success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSXMLParser *XMLParser) {
+        PlaylistParser *parser = [[PlaylistParser alloc] initWithXMLParser:XMLParser];
+        for (Track *track in parser.playlist) {
+            [self.playlist addSong:[NSURL URLWithString:track.realLocation] play:NO];
+            NSLog(@"add Track: %@", track.realLocation);
+        }
+        [self ready];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, NSXMLParser *XMLParser) {
+        NSLog(@"error: %@", error);
+    }];
+
+    [operation start];
 }
 
 - (void)ready {
@@ -97,25 +131,34 @@
     self.btnNext.enabled = NO;
 }
 
+- (void)disable {
+    self.btnPlay.enabled = NO;
+    self.btnPlay.title = @"Play";
+    self.btnStop.enabled = NO;
+    self.btnNext.enabled = NO;
+}
+
 - (IBAction)play:(NSButton *)sender {
-    if (self.player.status == playing) {
-        [self.player pause];
-    } else if (self.player.status == ready) {
-        [self.player play];
+    if (self.playlist.isPlaying) {
+        [self.playlist pause];
+        [self stopped];
+    } else {
+        [self.playlist play];
+        [self playing];
     }
 }
 
 - (IBAction)stop:(NSButton *)sender {
-    [self.player stop];
+    [self.playlist stop];
+    [self stopped];
 }
 
 - (IBAction)next:(NSButton *)sender {
-    [self.player next];
+    [self.playlist next];
 }
 
-- (void)reloadMusicPlayer {
-    [self.player removeObserver:self forKeyPath:@"status" context:NULL];
-    self.player = [[MusicPlayer alloc] init];
-    [self.player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:NULL];
+- (IBAction)volumeChanged:(NSSlider *)sender {
+    NSLog(@"slider changed: %d", self.volumeSlider.intValue);
+    [self.playlist setVolume:[self.volumeSlider doubleValue]/100];
 }
 @end

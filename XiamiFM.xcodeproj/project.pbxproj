@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F9D87B01888547D4A9A6EF2B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 336D73508D794CD5A7E088A3 /* libPods.a */; };
 		FA949560164E9FF7007002EC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA94955F164E9FF7007002EC /* Cocoa.framework */; };
 		FA94956A164E9FF7007002EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA949568164E9FF7007002EC /* InfoPlist.strings */; };
 		FA94956C164E9FF7007002EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA94956B164E9FF7007002EC /* main.m */; };
@@ -15,13 +16,16 @@
 		FA949576164E9FF7007002EC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA949574164E9FF7007002EC /* MainMenu.xib */; };
 		FA94957D164EB468007002EC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA94957C164EB468007002EC /* AVFoundation.framework */; };
 		FA94957F164F62D9007002EC /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA94957E164F62D9007002EC /* CoreMedia.framework */; };
-		FA949582164F8DFA007002EC /* MusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949581164F8DFA007002EC /* MusicPlayer.m */; };
-		FA949585164F97C3007002EC /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949584164F97C3007002EC /* Playlist.m */; };
 		FA949588164FE647007002EC /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949587164FE647007002EC /* Track.m */; };
 		FA94958B164FE73B007002EC /* PlaylistParser.m in Sources */ = {isa = PBXBuildFile; fileRef = FA94958A164FE73B007002EC /* PlaylistParser.m */; };
+		FAF9712A16A9C22C009F66A8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF9712916A9C22C009F66A8 /* AudioToolbox.framework */; };
+		FAF9713A16A9C6ED009F66A8 /* ASPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF9713516A9C6ED009F66A8 /* ASPlaylist.m */; };
+		FAF9713B16A9C6ED009F66A8 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF9713716A9C6ED009F66A8 /* AudioStreamer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		336D73508D794CD5A7E088A3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C839B67C7E2642699EED9442 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		FA94955B164E9FF7007002EC /* XiamiFM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XiamiFM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA94955F164E9FF7007002EC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FA949562164E9FF7007002EC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -37,14 +41,15 @@
 		FA949575164E9FF7007002EC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FA94957C164EB468007002EC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FA94957E164F62D9007002EC /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		FA949580164F8DFA007002EC /* MusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayer.h; sourceTree = "<group>"; };
-		FA949581164F8DFA007002EC /* MusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayer.m; sourceTree = "<group>"; };
-		FA949583164F97C3007002EC /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
-		FA949584164F97C3007002EC /* Playlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
 		FA949586164FE647007002EC /* Track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
 		FA949587164FE647007002EC /* Track.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Track.m; sourceTree = "<group>"; };
 		FA949589164FE73B007002EC /* PlaylistParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistParser.h; sourceTree = "<group>"; };
 		FA94958A164FE73B007002EC /* PlaylistParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistParser.m; sourceTree = "<group>"; };
+		FAF9712916A9C22C009F66A8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FAF9713416A9C6ED009F66A8 /* ASPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPlaylist.h; sourceTree = "<group>"; };
+		FAF9713516A9C6ED009F66A8 /* ASPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASPlaylist.m; sourceTree = "<group>"; };
+		FAF9713616A9C6ED009F66A8 /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
+		FAF9713716A9C6ED009F66A8 /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,9 +57,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAF9712A16A9C22C009F66A8 /* AudioToolbox.framework in Frameworks */,
 				FA94957F164F62D9007002EC /* CoreMedia.framework in Frameworks */,
 				FA94957D164EB468007002EC /* AVFoundation.framework in Frameworks */,
 				FA949560164E9FF7007002EC /* Cocoa.framework in Frameworks */,
+				F9D87B01888547D4A9A6EF2B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,9 +71,11 @@
 		FA949550164E9FF7007002EC = {
 			isa = PBXGroup;
 			children = (
+				FAF9713316A9C6ED009F66A8 /* AudioStreamer */,
 				FA949565164E9FF7007002EC /* XiamiFM */,
 				FA94955E164E9FF7007002EC /* Frameworks */,
 				FA94955C164E9FF7007002EC /* Products */,
+				C839B67C7E2642699EED9442 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,10 +90,12 @@
 		FA94955E164E9FF7007002EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAF9712916A9C22C009F66A8 /* AudioToolbox.framework */,
 				FA94957E164F62D9007002EC /* CoreMedia.framework */,
 				FA94957C164EB468007002EC /* AVFoundation.framework */,
 				FA94955F164E9FF7007002EC /* Cocoa.framework */,
 				FA949561164E9FF7007002EC /* Other Frameworks */,
+				336D73508D794CD5A7E088A3 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -105,10 +116,6 @@
 				FA949571164E9FF7007002EC /* AppDelegate.h */,
 				FA949572164E9FF7007002EC /* AppDelegate.m */,
 				FA949574164E9FF7007002EC /* MainMenu.xib */,
-				FA949580164F8DFA007002EC /* MusicPlayer.h */,
-				FA949581164F8DFA007002EC /* MusicPlayer.m */,
-				FA949583164F97C3007002EC /* Playlist.h */,
-				FA949584164F97C3007002EC /* Playlist.m */,
 				FA949586164FE647007002EC /* Track.h */,
 				FA949587164FE647007002EC /* Track.m */,
 				FA949589164FE73B007002EC /* PlaylistParser.h */,
@@ -130,6 +137,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FAF9713316A9C6ED009F66A8 /* AudioStreamer */ = {
+			isa = PBXGroup;
+			children = (
+				FAF9713416A9C6ED009F66A8 /* ASPlaylist.h */,
+				FAF9713516A9C6ED009F66A8 /* ASPlaylist.m */,
+				FAF9713616A9C6ED009F66A8 /* AudioStreamer.h */,
+				FAF9713716A9C6ED009F66A8 /* AudioStreamer.m */,
+			);
+			path = AudioStreamer;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -140,6 +158,7 @@
 				FA949557164E9FF7007002EC /* Sources */,
 				FA949558164E9FF7007002EC /* Frameworks */,
 				FA949559164E9FF7007002EC /* Resources */,
+				70E43652223940178E7E31EC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,6 +208,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		70E43652223940178E7E31EC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FA949557164E9FF7007002EC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -196,10 +232,10 @@
 			files = (
 				FA94956C164E9FF7007002EC /* main.m in Sources */,
 				FA949573164E9FF7007002EC /* AppDelegate.m in Sources */,
-				FA949582164F8DFA007002EC /* MusicPlayer.m in Sources */,
-				FA949585164F97C3007002EC /* Playlist.m in Sources */,
 				FA949588164FE647007002EC /* Track.m in Sources */,
 				FA94958B164FE73B007002EC /* PlaylistParser.m in Sources */,
+				FAF9713A16A9C6ED009F66A8 /* ASPlaylist.m in Sources */,
+				FAF9713B16A9C6ED009F66A8 /* AudioStreamer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,11 +324,17 @@
 		};
 		FA94957A164E9FF7007002EC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C839B67C7E2642699EED9442 /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XiamiFM/XiamiFM-Prefix.pch";
 				INFOPLIST_FILE = "XiamiFM/XiamiFM-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -300,11 +342,17 @@
 		};
 		FA94957B164E9FF7007002EC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C839B67C7E2642699EED9442 /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XiamiFM/XiamiFM-Prefix.pch";
 				INFOPLIST_FILE = "XiamiFM/XiamiFM-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -329,6 +377,7 @@
 				FA94957B164E9FF7007002EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
